@@ -1,9 +1,15 @@
 import React from 'react';
+import Bag from './components/Bag/Bag';
+import {useState} from "react";
 
 function App() {
+  const [buttonPopUp,setButtonPopUp] = useState(false);
+  
   return (
     <div className="App">
-      Hola mundo!
+        <button onClick={() => setButtonPopUp(true)}>Mochila</button>
+        <Bag trigger={buttonPopUp} setTrigger={setButtonPopUp}>
+        </Bag>
     </div>
   );
 }
