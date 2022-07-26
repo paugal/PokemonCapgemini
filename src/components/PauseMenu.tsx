@@ -1,5 +1,8 @@
 import React from 'react'
 import '../styles/PauseMenu.sass'
+import Play from '../assets/play.svg'
+import Music from '../assets/music.svg'
+import Restart from '../assets/restart.svg'
 
 export default function pauseMenu() {
   return (
@@ -7,13 +10,13 @@ export default function pauseMenu() {
       <div className='containerMenu'></div>
       <div className="PauseBox">
         <div className="iconMusic">
-          <button>Music</button>
+        <img src={Music} alt="music" />
         </div>
         <div className="iconRestart"> 
-        <button>Restart</button>
+        <img src={Restart} alt="restart" />
         </div>
         <div className="iconPlay"> 
-        <button>Play</button>
+        <img src={Play} alt="play" />
         </div>
         <div className="title"> 
           Pause 
