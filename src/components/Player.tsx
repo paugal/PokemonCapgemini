@@ -6,6 +6,7 @@ export default function Player() {
 
     const [xoffset,setOffSetX] = useState(0);
     const [yoffset,setOffSetY] = useState(0);
+    const [position, setPosition] = useState({x: 0, y:0})
     const [delta, setDelta] = useState(10);
     const limits = {minX: 0, maxX: 460, minY: 0, maxY: 460 }
 
@@ -28,15 +29,27 @@ export default function Player() {
     
     const moveTitleToDown = () => {
         setOffSetY(yoffset => yoffset + delta);
+        setPosition(prevPreferences =>  {
+            return { ...prevPreferences, y: prevPreferences.y + delta}
+        })
     };
     const moveTitleToRight = () => {
         setOffSetX(xoffset => xoffset + delta);
+        let aux = position
+        aux.x += delta
+        setPosition(position => aux)
     };
     const moveTitleToLeft = () => {
         setOffSetX(yoffset => yoffset - delta);
+        let aux = position
+        aux.x -= delta
+        setPosition(position => aux)
     };
     const moveTitleToUp = () => {
         setOffSetY(yoffset => yoffset - delta);
+        let aux = position
+        aux.y -= delta
+        setPosition(position => aux)
     };
 
     const detectKeyDown = (e: any) => {
@@ -59,6 +72,17 @@ export default function Player() {
     return(
         <div>
         
+        <h2
+            style={{
+            position: "absolute",
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            color: 'white',
+            margin: '0px'
+            }}
+        >
+            <div className='Player'>{position.x},{position.y}</div>
+        </h2>
         <h2
             style={{
             position: "absolute",
