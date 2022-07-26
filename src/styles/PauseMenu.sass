@@ -1,0 +1,47 @@
+
+.containerMenu
+    backdrop-filter: blur(5px)
+    width: 100%
+    height: 100%
+    position: absolute
+    
+    
+    
+    
+.PauseBox
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-template-rows: 0.6fr 1fr
+    grid-auto-columns: 1fr
+    gap: 0px 0px
+    grid-auto-flow: row
+    grid-template-areas: "title title title" "iconMusic iconRestart iconPlay"
+    width: 600px
+    height: 350px
+    background-color: #F4F2F2
+    border-radius: 20px
+    margin: 0
+    position: relative 
+    top: 40%
+    left: 50%
+    transform: translate(-50%, 50%)
+    
+
+
+.iconMusic
+    grid-area: iconMusic
+    margin: auto
+
+.iconRestart
+    grid-area: iconRestart
+    margin: auto
+
+.iconPlay
+    grid-area: iconPlay
+    margin: auto
+
+.title
+    grid-area: title
+    margin: auto
+    font-size: 90px
+    font-weight: 700
