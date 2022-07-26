@@ -50,6 +50,43 @@ export default function Player() {
         })
     };
 
+    useEffect(()=> {
+        yoffset > limits.maxY ? setOffSetY(limits.maxY) 
+        : yoffset < limits.minY ? setOffSetY(limits.minY) 
+        : setOffSetY(yoffset)
+     }, [yoffset])
+
+    useEffect(()=> {
+        xoffset > limits.maxX ? setOffSetX(limits.maxX) 
+        : xoffset < limits.minX ? setOffSetX(limits.minX)
+        : setOffSetX(xoffset)
+    }, [xoffset])
+    
+    const moveTitleToDown = () => {
+        setOffSetY(yoffset => yoffset + delta);
+        setPosition(prevPreferences =>  {
+            return { ...prevPreferences, y: prevPreferences.y + delta}
+        })
+    };
+    const moveTitleToRight = () => {
+        setOffSetX(xoffset => xoffset + delta);
+        let aux = position
+        aux.x += delta
+        setPosition(position => aux)
+    };
+    const moveTitleToLeft = () => {
+        setOffSetX(yoffset => yoffset - delta);
+        let aux = position
+        aux.x -= delta
+        setPosition(position => aux)
+    };
+    const moveTitleToUp = () => {
+        setOffSetY(yoffset => yoffset - delta);
+        let aux = position
+        aux.y -= delta
+        setPosition(position => aux)
+    };
+
     const detectKeyDown = (e: any) => {
         switch(e.key){
             case 'ArrowLeft':
