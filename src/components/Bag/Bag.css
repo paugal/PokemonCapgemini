@@ -12,7 +12,6 @@
 
 .popup-inner {
   position: fixed;
-  background-color: aqua;
   padding: 32px;
   width: 100%;
   height: 100%;
@@ -33,78 +32,29 @@
   background-size: 30%;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: normal;
-  align-items: normal;
-  align-content: normal;
-  margin-left: 35%;
-  margin-right: 35%;
-  margin-top: 50%;
+.container {  
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  width: 50%;
+  position: relative;
+  margin: auto;
+  top: 30%;
+  left: 25%;
+  transform: translate(-50%, 50%);
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .popup-inner {
-    background-size: 75%;
-  }
-
-  .flex-container{
-    
-  }
+.Item{
+  margin: auto;
 }
+.Item1 { grid-area: 1 / 1 / 2 / 2; }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .popup-inner {
-    background-size: 65%;
-  }
+.Item2 { grid-area: 2 / 1 / 3 / 2; }
 
-  .flex-container{
-    margin-top: 30%;
-  }
-}
+.Item3 { grid-area: 3 / 1 / 4 / 2; }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .popup-inner {
-    background-size: 50%;
-  }
-
-  .flex-container{
-    margin-top: 30%;
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .popup-inner {
-    background-size: 40%;
-  }
-
-  .flex-container{
-    margin-top: 30%;
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .popup-inner {
-    background-size: 30%;
-  }
-
-  .flex-container{
-    margin-top: 30%;
-  }
-
-}
-
-.popu-inner.close-btn {
-  position: absolute;
-  top: 16px;
-  right: 16;
-}
+.Item4 { grid-area: 4 / 1 / 5 / 2; }
 
 

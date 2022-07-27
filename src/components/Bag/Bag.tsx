@@ -6,14 +6,15 @@ function Bag(props: any) {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        
-        <div className="flex-container">
-          <button className="close-btn" onClick={() => props.setTrigger(false)}>
-            close
-          </button>
-          <ButtonBag></ButtonBag>
-          <ButtonBag></ButtonBag>
-          <ButtonBag></ButtonBag>
+        <div className="container">
+          <div className="Item Item1"><ButtonBag></ButtonBag></div>
+          <div className="Item Item2"><ButtonBag></ButtonBag></div>
+          <div className="Item Item3"><ButtonBag></ButtonBag></div>
+
+          <div className="Item Item4">
+            <button onClick={() => props.setTrigger(false)}>close</button>
+          </div>
+
         </div>
       </div>
     </div>
