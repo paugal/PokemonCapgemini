@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { Component, useEffect, useState  } from "react";
 import '../styles/PauseMenu.sass'
 import Play from '../assets/play.svg'
 import Music from '../assets/music.svg'
 import Restart from '../assets/restart.svg'
 
-export default function pauseMenu() {
-  return (
+export default function PauseMenu() {
+
+  const [showMenu, setShowMenu] = useState(false)
+  useEffect(()=> {
+    document.addEventListener('keydown',  detectKeyDown, true)
+  }, [])
+
+  const detectKeyDown = (e: any) => {
+    
+    if(e.key === 'p' && showMenu === false){
+      setShowMenu(prevShowMenu => !prevShowMenu)
+    }
+ 
+  }
+
+  const pauseMenuDiv: JSX.Element = showMenu ? (
     <div>
       <div className='containerMenu'></div>
       <div className="PauseBox">
@@ -23,5 +37,12 @@ export default function pauseMenu() {
         </div>
       </div>
     </div>
+  ): (<div></div>)
+
+  return (
+    <div>
+      {pauseMenuDiv}
+    </div>
+    
   );
 }
