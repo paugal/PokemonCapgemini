@@ -1,86 +1,74 @@
-import { render } from "@testing-library/react";
-import React, { Component, useEffect, useState  } from "react";
-import '../styles/Player.sass'
+import React, { useState, useEffect, useRef } from 'react'
+import { PLAYER_HEIGHT, PLAYER_WIDTH, GAME_HEIGHT, GAME_WIDTH } from "../data/constants"
+import styled from 'styled-components'
 
 export default function Player() {
 
-    const [position, setPosition] = useState({x: 0, y:0})
-    const [delta, setDelta] = useState(10);
-    const limits = {minX: 0, maxX: 460, minY: 0, maxY: 460 }
+  const [playerPosition, setPlayerPosition] = useState<{ x: number; y: number }>({ x: GAME_WIDTH / 2, y: GAME_HEIGHT / 2 })
+  const steps = useRef(0)
 
-    useEffect(()=> {
-        //console.log("rendering por el useeffect")
-        document.addEventListener('keydown',  detectKeyDown, true)
-    }, [])
-    
-    useEffect(()=> {
-        position.y > limits.maxY ? setPosition(prevPreferences =>  {
-            return { ...prevPreferences, y: limits.maxY}
-        }) 
-        : position.y < limits.minY ? setPosition(prevPreferences =>  {
-            return { ...prevPreferences, y: limits.minY}
-        }) 
-        : position.x > limits.maxX ? setPosition(prevPreferences =>  {
-            return { ...prevPreferences, x: limits.maxX}
-        }) 
-        : position.x < limits.minX ? setPosition(prevPreferences =>  {
-            return { ...prevPreferences, x: limits.minX}
-        }) : setPosition(position)
-     }, [position])
-    
-    const moveTitleToDown = () => {
-        
-        setPosition(prevPreferences =>  {
-            return { ...prevPreferences, y: prevPreferences.y + delta}
-        })
-    };
-    const moveTitleToRight = () => {
-        setPosition(prevPreferences =>  {
-            return { ...prevPreferences, x: prevPreferences.x + delta}
-        })
-    };
-    const moveTitleToLeft = () => {
-        setPosition(prevPreferences =>  {
-            return { ...prevPreferences, x: prevPreferences.x - delta}
-        })
-    };
-    const moveTitleToUp = () => {
-        setPosition(prevPreferences =>  {
-            return { ...prevPreferences, y: prevPreferences.y - delta}
-        })
-    };
+  console.log("renderiza el PLAYER")
 
-    const detectKeyDown = (e: any) => {
-        switch(e.key){
-            case 'ArrowLeft':
-                moveTitleToLeft()
-                break;
-            case 'ArrowRight':
-                moveTitleToRight()
-                break;
-            case 'ArrowUp':
-                moveTitleToUp()
-                break;
-            case 'ArrowDown':
-                moveTitleToDown()
-                break;
-        }
+  const detectKeyDown = (e: any) => {
+    console.log('Clicked Key: ', e.key)
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        console.log("pulsamos izquierda");
+        setPlayerPosition(prevPosition => { return { ...prevPosition, x: prevPosition.x > 0 ? prevPosition.x - 10 : 0 } })
+        break;
+      case 'ArrowRight':
+        console.log("pulsamos derecha");
+        setPlayerPosition(prevPosition =>
+          ({ ...prevPosition, x: prevPosition.x < GAME_WIDTH - PLAYER_WIDTH ? prevPosition.x + 10 : GAME_WIDTH - PLAYER_WIDTH })
+        )
+
+        break;
+      case 'ArrowUp':
+        console.log("pulsamos arriba");
+        setPlayerPosition(prevPosition =>
+          ({ ...prevPosition, y: prevPosition.y > 0 ? prevPosition.y - 10 : 0 })
+        )
+        break;
+      case 'ArrowDown':
+        console.log("pulsamos abajo");
+        setPlayerPosition(prevPosition => { return { ...prevPosition, y: prevPosition.y < GAME_HEIGHT - PLAYER_HEIGHT ? prevPosition.y + 10 : GAME_HEIGHT - PLAYER_HEIGHT } }
+        )
+        break;
     }
 
-    return(
-        <div>
-        
-        <h2
-            style={{
-            position: "absolute",
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-            color: 'white',
-            margin: '0px'
-            }}
-        >
-            <div className='Player'>{position.x},{position.y}</div>
-        </h2>
-        </div>
-    );
+  }
+  useEffect(() => {
+    document.addEventListener('keydown', detectKeyDown, true)
+  }, [])
+
+
+  useEffect(() => {
+    steps.current = steps.current + 1
+  }, [playerPosition])
+
+  return (
+    <>
+      <PlayerStyle height={PLAYER_HEIGHT} width={PLAYER_WIDTH} top={playerPosition.y} left={playerPosition.x}></PlayerStyle>
+      <div>Steps :{steps.current}</div>
+    </>
+
+  )
 }
+
+type PlayerStyleProps = {
+  height: number;
+  width: number;
+  top: number;
+  left: number
+}
+
+export const PlayerStyle = styled.div<PlayerStyleProps>`
+  position: absolute;
+  background-color: red;
+  border-radius:50%;  
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px; 
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+`;
