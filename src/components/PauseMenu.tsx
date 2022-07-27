@@ -24,13 +24,13 @@ export default function PauseMenu() {
       <div className='containerMenu'></div>
       <div className="PauseBox">
         <div className="iconMusic">
-        <img src={Music} alt="music" />
+          <img src={Music} alt="music" />
         </div>
         <div className="iconRestart"> 
-        <img src={Restart} alt="restart" />
+          <img src={Restart} alt="restart" />
         </div>
         <div className="iconPlay"> 
-        <img src={Play} alt="play" />
+          <img src={Play} alt="play" />
         </div>
         <div className="title"> 
           Pause 

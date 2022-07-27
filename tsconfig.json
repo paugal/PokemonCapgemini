@@ -23,6 +23,6 @@
   "include": [
     "src",
     "src/assets", 
-    "src/custom.d.ts"
+    "custom.d.ts"
   ]
 }
